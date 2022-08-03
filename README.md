@@ -14,7 +14,7 @@
 
 This step-by-step guide will explain how to use cURL or simply, curl, with proxy servers. It covers all the aspects, beginning from installation to explaining various options to set the proxy.
 
-For a detailed explanation, see our [blog post](https://oxylabs.io/blog/curl-with-proxy).
+For a detailed explanation, see our [blog post](https://oxy.yt/ArRn).
 
 ## What is cURL?
 
@@ -24,7 +24,7 @@ cURL is a command line tool for sending and receiving data using the url.
 curl https://www.google.com
 ```
 
-The question “[what is cURL](https://oxylabs.io/blog/what-is-curl)?” is also answered in one of our previous articles. We recommend reading it if you want to learn how it became such a universal asset.
+The question “[what is cURL](https://oxy.yt/ArRn)?” is also answered in one of our previous articles. We recommend reading it if you want to learn how it became such a universal asset.
 
 ## Installation
 
@@ -190,4 +190,4 @@ If the proxy server is using socks protocol, the syntax remains the same:
 curl -x "socks5://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
 ```
 
-If you wish to find out more about How to Use cURL With Proxy, see our [blog post](https://oxylabs.io/blog/curl-with-proxy).
+If you wish to find out more about How to Use cURL With Proxy, see our [blog post](https://oxy.yt/ArRn).
