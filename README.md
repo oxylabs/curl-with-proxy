@@ -16,35 +16,29 @@
 - [Bonus tip – turning proxies off and on quickly](#bonus-tip--turning-proxies-off-and-on-quickly)
 - [cURL socks proxy](#curl-socks-proxy)
 
-This step-by-step guide will explain how to use cURL or simply, curl, with proxy servers. It covers all the aspects, beginning from installation to explaining various options to set the proxy.
+This step-by-step guide will explain how to use cURL or, simply, curl with proxy servers. It covers all the aspects, beginning from installation to explaining various options to set the proxy.
 
 For a detailed explanation, see our [blog post](https://oxy.yt/ArRn).
 
 ## What is cURL?
 
-cURL is a command line tool for sending and receiving data using the url. 
+cURL is a command line tool for sending and receiving data using the URL. The following command gets the HTML of the page and prints it in the console:
 
 ```shell
 curl https://www.google.com
 ```
 
-The question “[what is cURL](https://oxy.yt/ArRn)?” is also answered in one of our previous articles. We recommend reading it if you want to learn how it became such a universal asset.
-
 ## Installation
 
-cURL is provided with many Linux distributions and with MacOS. Now it is provided with Windows 10 as well.
-
-If your Linux distribution is not provided with it, you can install it by running the install command. For example, on Ubuntu, open Terminal and run this command:
+cURL is provided with many Linux distributions and MacOS. Now, it is also provided with Windows 10. You can check whether your computer has curl installed by opening your terminal and running the following command:
 
 ```shell
-sudo apt install curl
+curl --version
 ```
-
-If you are running an older version of Windows, or if you want to install an alternate version, you can download curl from the [official download page](https://curl.se/download.html).
 
 ## What you need to connect to a proxy
 
-Irrespective of which proxy service you use, you will need the following information to use a:
+You’ll need the following information to anonymize curl behind a proxy:
 
 - proxy server address
 - port
@@ -52,11 +46,11 @@ Irrespective of which proxy service you use, you will need the following informa
 - username (if authentication is required)
 - password (if authentication is required)
 
-In this tutorial, we are going to assume that the proxy server is **127.0.0.1**, the port is **1234**, the user name is **user**, and the password is **pwd**. We will look into multiple examples covering various protocols..
+In this tutorial, let's assume that the proxy server is **127.0.0.1**, the port is **1234**, the user name is **user**, and the password is **pwd**. We will look into multiple examples covering various protocols.
 
 ## Command line argument to set proxy in cURL
 
-Open terminal and type the following command, and press Enter:
+Open the terminal, type the following command, and press Enter:
 
 ```shell
 curl --help
@@ -68,7 +62,7 @@ The output is going to be a huge list of options. One of them is going to look l
 -x, --proxy [protocol://]host[:port] 
 ```
 
-Note that **x** is small, and it is case-sensitive. The proxy details can be supplied using **-x** or **–proxy** switch. Both mean the same thing. Bot of the curl with proxy commands are same:
+Note that **x** is lowercase, and it is case-sensitive. The proxy details can be supplied using the **-x** or **–proxy** switch. Both mean the same thing:
 
 ```shell
 curl -x "http://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
@@ -80,13 +74,13 @@ or
 curl --proxy "http://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
 ```
 
-**NOTE.** If there are SSL certificate errors, add **-k** (note the small **k**) to the **curl** command. This will allow insecure server connections when using SSL.
+**NOTE.** If there are SSL certificate errors, add **-k** (lowercase) to the **curl** command. This will allow insecure server connections when using SSL:
 
 ```shell
 curl --proxy "http://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip" -k
 ```
 
-Another interesting thing to note here is that the default proxy protocol is http. Thus, following two commands will do exactly the same:
+Another interesting thing to note here is that the default proxy protocol is HTTP. Thus, the following two commands will do exactly the same:
 
 ```shell
 curl --proxy "http://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
@@ -95,44 +89,44 @@ curl --proxy "user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
 
 ## Using environment variables
 
-Another way to use proxy with curl is to set the environment variables **http_proxy** and **https_proxy**. 
+Another way to use proxy with curl is to set the environment variables **http_proxy** and **https_proxy**:
 
 ```shell
 export http_proxy="http://user:pwd@127.0.0.1:1234"
 export https_proxy="http://user:pwd@127.0.0.1:1234"
 ```
 
-After running these two commands, run **curl** normally.
+After running these two commands, run **curl** normally:
 
 ```shell
 curl "http://httpbin.org/ip"
 ```
 
-To stop using proxy, turn off the global proxy by unsetting these two variables:
+To stop using a proxy, turn off the global proxy by unsetting these two variables:
 
 ```shell
 unset http_proxy
 unset https_proxy
 ```
 
-## Configure cURL to always use proxy
+## Configure cURL to always use a proxy
 
-If you want a proxy for curl but not for other programs, this can be achieved by creating a [curl config file](https://everything.curl.dev/cmdline/cmdline-configfile).
+If you want a proxy for curl but not for other programs, you can create a [curl config file](https://everything.curl.dev/cmdline/configfile.html).
 
-For Linux and MacOS, open terminal and navigate to your home directory. If there is already a **.curlrc** file, open it. If there is none, create a new file. Here are the set of commands that can be run:
+For Linux and MacOS, open the terminal and navigate to your home directory. If there is already a **.curlrc** file, open it. If there is none, create a new file. Here are the set of commands that can be run:
 
 ```shell
 cd ~
 nano .curlrc
 ```
 
-In this file, add this line:
+In this file, add a proxy authorization line:
 
 ```shell
 proxy="http://user:pwd@127.0.0.1:1234"
 ```
 
-Save the file. Now curl with proxy is ready to be used. 
+Save the file. Now, curl with proxy is ready to be used. 
 
 Simply run **curl** normally and it will read the proxy from **.curlrc** file.
 
@@ -142,21 +136,23 @@ curl "http://httpbin.org/ip"
 
 On Windows, the file is named **_curlrc**. This file can be placed in the **%APPDATA%** directory.
 
-To find the exact path of **%APPDATA%**, open command prompt and run the following command:
+To find the exact path of **%APPDATA%**, open the command prompt and run the following command:
 
 ```shell
 echo %APPDATA%
 ```
 
-This directory will be something like **C:\Users\<your_user>\AppData\Roaming**. Now go to this directory, and create a new file **_curlrc**, and set the proxy by adding this line:
+This directory will be something like **C:\Users\<your_user>\AppData\Roaming**. Now go to this directory, create a new file **_curlrc**, and set the proxy by adding this line:
 
 ```shell
 proxy="http://user:pwd@127.0.0.1:1234"
 ```
 
+It works exactly the same way in Linux, MacOS, and Windows.
+
 ## Ignore or override proxy for one request
 
-To override proxy for one request, set the new proxy using **-x** or **–proxy** switch as usual:
+To override the proxy for one request, set the new proxy using the **-x** or **–proxy** switch as usual:
 
 ```shell
 curl --proxy "http://user:pwd@1.0.0.1:8090" "http://httpbin.org/ip"
@@ -164,20 +160,20 @@ curl --proxy "http://user:pwd@1.0.0.1:8090" "http://httpbin.org/ip"
 
 ## Bonus tip – turning proxies off and on quickly
 
-You can create an alias in your **.bashrc** file to set proxies and unset proxies. For example, open **.bashrc** file using any editor and add these lines:
+You can create an alias in your **.bashrc** file to set proxies and unset proxies. For example, open the **.bashrc** file using any editor and add these lines:
 
 ```shell
 alias proxyon="export http_proxy=' http://user:pwd@127.0.0.1:1234';export https_proxy=' http://user:pwd@127.0.0.1:1234'"
 alias proxyoff="unset http_proxy;unset https_proxy"
 ```
 
-After adding these lines, save the **.bashrc** and update the shell to read this **.bashrc**. To do this, run this this command in the terminal:
+After adding the lines, save the **.bashrc** and update the shell to read this **.bashrc**. To do this, run this command in the terminal:
 
 ```shell
 . ~/.bashrc
 ```
 
-Now, whenever you need to turn on the proxy, you can quickly turn on the proxy, run one or more curl commands and then turn off the proxies like this:
+Now, you can quickly turn on the proxy, run one or more curl commands, and then turn off the proxies like this:
 
 ```shell
 proxyon
@@ -186,12 +182,12 @@ curl "http://google.com"
 proxyoff 
 ```
 
-## cURL socks proxy
+## cURL SOCKS proxy
 
-If the proxy server is using socks protocol, the syntax remains the same:
+If the proxy server is using the SOCKS protocol, the syntax remains the same:
 
 ```shell
 curl -x "socks5://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
 ```
 
-If you wish to find out more about How to Use cURL With Proxy, see our [blog post](https://oxy.yt/ArRn).
+If you want to learn more about using cURL with proxy, see our [blog post](https://oxy.yt/ArRn).
